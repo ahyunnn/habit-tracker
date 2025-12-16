@@ -1,42 +1,58 @@
 "use client";
 
 import Link from "next/link";
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Typography,
+  Box,
+} from "@mui/material";
 
 interface SideBarProps {
   isOpen: boolean;
 }
+
+const drawerWidth = 240;
+
 const SideBar = ({ isOpen }: SideBarProps) => {
   return (
-    <aside
-      className={`
-        fixed
-        top-[60px]
-        left-0
-        h-[calc(100vh-60px)]
-        w-[240px]  
-        bg-gray-100
-        p-4
-        transition-transform 
-        duration-300
-        ease-in-out
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        `}
+    <Drawer
+      variant="temporary"
+      open={isOpen}
+      onClose={() => {}}
+      ModalProps={{ keepMounted: true }}
+      sx={{
+        width: drawerWidth,
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+          boxSizing: "border-box",
+          top: "60px",
+          height: "calc(100vh - 60px)",
+        },
+      }}
     >
-      <div>
-        <div className="text-lg mb-2 font-bold">Template</div>
-        <ul className="space-y-2">
-          <li className="cursor-pointer rounded px-2 py-1">
-            <Link href="/template/bucket-list">Bucket-List</Link>
-          </li>
-          <li className="cursor-pointer  rounded px-2 py-1">
-            <Link href="/template/habit-tracker">Habit-Tracker</Link>
-          </li>
-          <li className="cursor-pointer  rounded px-2 py-1">
-            <Link href="/template/mandalart">Mandalart</Link>
-          </li>
-        </ul>
-      </div>
-    </aside>
+      <Box sx={{ p: 2 }}>
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Template
+        </Typography>
+
+        <List>
+          <ListItemButton component={Link} href="/template/bucket-list">
+            <ListItemText primary="Bucket-List" />
+          </ListItemButton>
+
+          <ListItemButton component={Link} href="/template/habit-tracker">
+            <ListItemText primary="Habit-Tracker" />
+          </ListItemButton>
+
+          <ListItemButton component={Link} href="/template/mandalart">
+            <ListItemText primary="Mandalart" />
+          </ListItemButton>
+        </List>
+      </Box>
+    </Drawer>
   );
 };
 

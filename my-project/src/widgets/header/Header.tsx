@@ -1,16 +1,41 @@
+"use client";
+
 import Link from "next/link";
+import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 interface HeaderProps {
   onToggle: () => void;
 }
+
 const Header = ({ onToggle }: HeaderProps) => {
   return (
-    <header className="h-[60px] bg-green-600 text-white text-lg font-bold flex items-center px-4">
-      <button onClick={onToggle} className="mr-4">
-        ☰
-      </button>
-      <Link href="/"> Habit Tracker</Link>
-    </header>
+    <AppBar
+      position="fixed"
+      color="primary"
+      sx={{
+        height: 60,
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+    >
+      <Toolbar sx={{ minHeight: 60 }}>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open sidebar"
+          onClick={onToggle}
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Typography variant="h6" fontWeight="bold">
+            Habit Tracker
+          </Typography>
+        </Link>
+      </Toolbar>
+    </AppBar>
   );
 };
 
