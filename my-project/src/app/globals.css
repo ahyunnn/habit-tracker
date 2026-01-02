@@ -8,13 +8,13 @@
   --foreground: black;
 }
 
-/* 🔥 다크 모드일 때만 반전 */
+/* 🔥 다크 모드일 때만 반전
 @media (prefers-color-scheme: dark) {
   :root {
     --background: black;
     --foreground: white;
   }
-}
+} */
 
 /* 🔥 전체 화면 기본 스타일 */
 body {

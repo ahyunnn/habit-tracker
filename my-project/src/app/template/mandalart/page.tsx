@@ -1,15 +1,41 @@
+"use client";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+
 const MandalartPage = () => {
   return (
-    <div>
-      <div>Mandalart</div>
-      <div className="grid grid-cols-3 gap-2 w-full max-w-md">
-        {[...Array(9)].map((_, i) => (
-          <div key={i} className="border p-4 rounded-lg bg-white text-center">
+    <Box>
+      <Typography variant="h5" gutterBottom>
+        Mandalart
+      </Typography>
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: 2,
+          maxWidth: 400,
+        }}
+      >
+        {Array.from({ length: 9 }).map((_, i) => (
+          <Paper
+            key={i}
+            elevation={1}
+            sx={{
+              aspectRatio: "1 / 1",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 2,
+            }}
+          >
             Cell {i + 1}
-          </div>
+          </Paper>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

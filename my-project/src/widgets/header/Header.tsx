@@ -12,8 +12,8 @@ const Header = ({ onToggle }: HeaderProps) => {
   return (
     <AppBar
       position="fixed"
-      color="primary"
       sx={{
+        backgroundColor: "gray",
         height: 60,
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}

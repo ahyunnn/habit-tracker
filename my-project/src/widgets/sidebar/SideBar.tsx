@@ -19,12 +19,10 @@ const drawerWidth = 240;
 const SideBar = ({ isOpen }: SideBarProps) => {
   return (
     <Drawer
-      variant="temporary"
+      variant="persistent" // ⭐ 핵심
       open={isOpen}
-      onClose={() => {}}
-      ModalProps={{ keepMounted: true }}
       sx={{
-        width: drawerWidth,
+        flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",

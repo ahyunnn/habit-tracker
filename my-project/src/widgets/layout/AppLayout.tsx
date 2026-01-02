@@ -5,6 +5,8 @@ import { Box } from "@mui/material";
 import Header from "@/widgets/header/Header";
 import SideBar from "@/widgets/sidebar/SideBar";
 
+const drawerWidth = 240;
+
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -15,7 +17,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <Box sx={{ display: "flex" }}>
         <SideBar isOpen={isSidebarOpen} />
 
-        <Box component="main" sx={{ flexGrow: 1, pt: "80px", pl: "20px" }}>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            pt: "80px",
+            pl: "50px",
+            transition: "margin 0.3s ease",
+            marginLeft: isSidebarOpen ? `${drawerWidth}px` : 0,
+          }}
+        >
           {children}
         </Box>
       </Box>
