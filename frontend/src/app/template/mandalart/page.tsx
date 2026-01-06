@@ -7,9 +7,7 @@ import Paper from "@mui/material/Paper";
 const MandalartPage = () => {
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Mandalart
-      </Typography>
+      <Typography>Mandalart</Typography>
 
       <Box
         sx={{
