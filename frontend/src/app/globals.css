@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🔥 기본 라이트 모드 색상 */
+:root {
+  --background: white;
+  --foreground: black;
+}
+
+/* 🔥 다크 모드일 때만 반전
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: black;
+    --foreground: white;
+  }
+} */
+
+/* 🔥 전체 화면 기본 스타일 */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
