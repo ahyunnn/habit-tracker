@@ -1,4 +1,4 @@
-## Frontend Tech Stack
+## ✅ Frontend Tech Stack
 
 ### Framework
 
@@ -32,7 +32,7 @@
 
 ---
 
-## Backend Tech Stack
+## ✅ Backend Tech Stack
 
 ### Runtime
 
@@ -62,7 +62,7 @@
 
 ---
 
-## Common Tools
+## ✅ Common Tools
 
 - **Git / GitHub**
 
@@ -79,7 +79,7 @@
 
 ---
 
-## Tech Selection Criteria
+## ✅ Tech Selection Criteria
 
 1. 학습 곡선이 완만할 것
 2. 포트폴리오에서 설명 가능한 기술일 것
