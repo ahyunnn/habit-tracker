@@ -1,9 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import LoginForm from "@/features/auth/login/ui/LoginForm";
 
 const LoginPage = () => {
   return (
-    <Box>
-      <Typography>로그인</Typography>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "#c0afaf",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <LoginForm />
     </Box>
   );
 };
