@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 const MandalartPage = () => {
   return (
     <Box>
-      <Typography>Mandalart</Typography>
+      <Typography>Mandalar</Typography>
 
       <Box
         sx={{
