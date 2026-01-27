@@ -1,6 +1,40 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+"use client"
 
+import { ChangeEvent, useState } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { SignUpAPI } from "../api/signupAPI";
+
+interface UserInfo {
+  id: string;
+  password: string;
+  nickname: string;
+}
 const SignUpForm = () => {
+  const [userInfo, setUserInfo] = useState<UserInfo>({id: "", password: "", nickname: ""})
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+   const {name, value} = e.target;
+
+   setUserInfo((prev) => ({
+    ...prev,
+    [name]: value
+   }))
+  }
+
+  const handleSubmit = async () => {
+    if (!userInfo.id || !userInfo.password || !userInfo.nickname) {
+      alert("모든 항목을 입력해주세요.")
+      return
+    }
+
+    try {
+      const result = await SignUpAPI(userInfo)
+      console.log(result)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -23,12 +57,15 @@ const SignUpForm = () => {
           아이디
         </Typography>
         <TextField
+          name="id"
           fullWidth
           size="small"
           sx={{
             borderRadius: 1,
           }}
-        />
+          value={userInfo.id}
+          onChange={handleChange}
+          />
       </Box>
 
       <Box>
@@ -36,13 +73,16 @@ const SignUpForm = () => {
           비밀번호
         </Typography>
         <TextField
+          name="password"
           fullWidth
           size="small"
           type="password"
           sx={{
             borderRadius: 1,
           }}
-        />
+          value={userInfo.password}
+          onChange={handleChange}
+          />
       </Box>
 
       <Box>
@@ -50,11 +90,14 @@ const SignUpForm = () => {
           닉네임
         </Typography>
         <TextField
+          name="nickname"
           fullWidth
           size="small"
           sx={{
             borderRadius: 1,
           }}
+          value={userInfo.nickname}
+          onChange={handleChange}
         />
       </Box>
 
@@ -69,6 +112,7 @@ const SignUpForm = () => {
             backgroundColor: "#bdbdbd",
           },
         }}
+        onClick={() => handleSubmit()}
       >
         회원가입
       </Button>
