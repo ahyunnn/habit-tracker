@@ -1,11 +1,26 @@
 import express, { Request, Response } from "express";
 import authRoutes from "./routes/auth";
+import cors from "cors"
 
-const app = express();
+const app = express()
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+app.use((req, res, next) => {
+  console.log("🔥 incoming:", req.method, req.url);
+  next();
+});
+
 
 // 미들웨어 설정
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 // 라우터 연결
 app.use("/api/auth", authRoutes);
