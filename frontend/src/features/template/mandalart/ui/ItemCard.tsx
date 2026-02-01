@@ -39,8 +39,12 @@ export const ItemCard = ({
             textAlign: "center",
             fontSize: "0.75rem",
             fontWeight: isTitle ? "bold" : "normal",
-            color: isTitle && isCenterBlock ? "white" : "inherit",
+            color: "#000",
             p: 1,
+
+            whiteSpace: "pre-wrap",
+            wordBreak: "keep-all",
+            overflowWrap: "break-word",
           },
         }}
       />

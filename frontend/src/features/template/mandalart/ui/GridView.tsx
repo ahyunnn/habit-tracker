@@ -3,6 +3,7 @@ import { ItemCard } from "./ItemCard";
 
 export const GridView = ({ bId, data, onUpdate }: any) => {
   const cellLayout = ["1", "2", "3", "4", "title", "5", "6", "7", "8"];
+
   return (
     <Box
       sx={{

@@ -1,69 +1,88 @@
 import { Box, InputBase } from "@mui/material";
 import { GridView } from "./GridView";
 
-export const ListView = ({ bId, data, onUpdate }: any) => {
-  const cellIds = ["1", "2", "3", "4", "5", "6", "7", "8"];
+interface ListViewProps {
+  bId: string;
+  data: any;
+  onUpdate: (blockId: string, cellId: string, value: string) => void;
+}
 
+export const ListView = ({ bId, data, onUpdate }: ListViewProps) => {
   if (bId === "center") {
     return <GridView bId={bId} data={data} onUpdate={onUpdate} />;
   }
+
+  const cellIds = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  const cells = data[bId].cells;
 
   return (
     <Box
       sx={{
         height: "100%",
+        p: 1,
         display: "flex",
         flexDirection: "column",
-        p: 0.5,
-        boxSizing: "border-box",
-        overflow: "hidden",
       }}
     >
       <Box
         sx={{
-          height: 36,
+          mb: 1,
+          p: 0.5,
           bgcolor: "#f0f0f0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "0.8rem",
           fontWeight: 700,
-          mb: 0.5,
+          fontSize: "0.8rem",
         }}
       >
-        {data.center.cells[bId] || `주제 ${bId}`}
+        <InputBase
+          fullWidth
+          placeholder="주제를 입력해주세요"
+          value={cells.title || ""}
+          onChange={(e) => onUpdate(bId, "title", e.target.value)}
+          sx={{
+            textAlign: "center",
+            "& input": {
+              textAlign: "center",
+            },
+          }}
+        />
       </Box>
 
-      <Box
-        sx={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {cellIds.map((cId) => (
-          <Box
-            key={cId}
-            sx={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              borderBottom: "1px solid #eee",
-              px: 1,
-              minHeight: 0,
-            }}
-          >
-            <Box sx={{ width: 16, fontSize: "0.65rem", color: "#aaa" }}>
-              {cId}
+      <Box sx={{ flexGrow: 1 }}>
+        {cellIds.map((cId, idx) => {
+          const hasValue = Boolean(cells[cId]?.trim());
+
+          return (
+            <Box
+              key={cId}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                height: 25,
+                borderBottom: "1px solid #eee",
+                py: 0.5,
+              }}
+            >
+              <Box
+                sx={{
+                  width: 20,
+                  fontSize: "0.7rem",
+                  color: "#aaa",
+                  textAlign: "center",
+                  visibility: hasValue ? "visible" : "hidden",
+                }}
+              >
+                {idx + 1}
+              </Box>
+
+              <InputBase
+                fullWidth
+                value={cells[cId] || ""}
+                onChange={(e) => onUpdate(bId, cId, e.target.value)}
+                sx={{ fontSize: "0.75rem" }}
+              />
             </Box>
-            <InputBase
-              fullWidth
-              value={data[bId].cells[cId] || ""}
-              onChange={(e) => onUpdate(bId, cId, e.target.value)}
-              sx={{ fontSize: "0.7rem" }}
-            />
-          </Box>
-        ))}
+          );
+        })}
       </Box>
     </Box>
   );

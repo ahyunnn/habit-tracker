@@ -12,17 +12,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Header onToggle={() => setIsSidebarOpen((prev) => !prev)} />
+      {/* <Header onToggle={() => setIsSidebarOpen((prev) => !prev)} /> */}
 
       <Box sx={{ display: "flex" }}>
-        <SideBar isOpen={isSidebarOpen} />
+        {/* <SideBar isOpen={isSidebarOpen} /> */}
 
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            pt: "80px",
-            pl: "50px",
+            pt: "20px",
+            pb: "20px",
+            pl: "30px",
             transition: "margin 0.3s ease",
             marginLeft: isSidebarOpen ? `${drawerWidth}px` : 0,
           }}

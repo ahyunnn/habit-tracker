@@ -1,9 +1,6 @@
 import { useState } from "react";
 import {
   Box,
-  Button,
-  FormControl,
-  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -15,6 +12,7 @@ import ListIcon from "@mui/icons-material/List";
 import { GridView } from "./ui/GridView";
 import { ListView } from "./ui/ListView";
 import DownloadBtn from "./ui/DownloadBtn";
+import About from "./ui/About";
 
 const createInitialData = () => {
   const blocks: any = { center: { cells: {} } };
@@ -42,16 +40,39 @@ export default function MandalartPage() {
 
   const handleUpdate = (blockId: string, cellId: string, value: string) => {
     setData((prev: any) => {
-      const newData = { ...prev };
-      newData[blockId].cells[cellId] = value;
+      const next = {
+        ...prev,
+        [blockId]: {
+          ...prev[blockId],
+          cells: {
+            ...prev[blockId].cells,
+            [cellId]: value,
+          },
+        },
+      };
 
+      // center ↔ outer 연동 로직도 "같은 방식"으로 복사
       if (blockId === "center" && cellId !== "title") {
-        newData[cellId].cells["title"] = value;
-      } else if (blockId !== "center" && cellId === "title") {
-        newData["center"].cells[blockId] = value;
+        next[cellId] = {
+          ...next[cellId],
+          cells: {
+            ...next[cellId].cells,
+            title: value,
+          },
+        };
       }
 
-      return { ...newData };
+      if (blockId !== "center" && cellId === "title") {
+        next.center = {
+          ...next.center,
+          cells: {
+            ...next.center.cells,
+            [blockId]: value,
+          },
+        };
+      }
+
+      return next;
     });
   };
 
@@ -60,86 +81,97 @@ export default function MandalartPage() {
   };
 
   return (
-    <Box
-      sx={{
-        height: "90vh",
-        display: "flex",
-        flexDirection: "column",
-        mb: 2,
-      }}
-    >
+    <Box sx={{ display: "flex", width: "100%" }}>
       <Box
         sx={{
-          mb: 2,
+          flex: 3,
+          height: "90vh",
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "70%",
-        }}
-      >
-        <ToggleButtonGroup
-          value={view}
-          exclusive
-          onChange={(_, v) => v && setView(v)}
-        >
-          <ToggleButton value="grid">
-            <GridViewIcon /> Grid View
-          </ToggleButton>
-          <ToggleButton value="list">
-            <ListIcon /> List View
-          </ToggleButton>
-        </ToggleButtonGroup>
-        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-          <Box>
-            <Select
-              value={downloadType}
-              onChange={handleChange}
-              size="small"
-              sx={{
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "black", // 기본 핑크
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "pink", // 포커스 시 핑크
-                  borderWidth: 2,
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "pink", // hover 핑크
-                },
-              }}
-            >
-              <MenuItem value="png">PNG</MenuItem>
-              <MenuItem value="pdf">PDF</MenuItem>
-            </Select>
-          </Box>
-          <DownloadBtn type={downloadType} />
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          flexGrow: 1,
-          gap: 2,
+          flexDirection: "column",
+          mb: 2,
+          pr: 2,
         }}
       >
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gridTemplateRows: "repeat(3, 1fr)",
-            gap: 2,
-            width: "70%",
+            mb: 2,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {blockLayout.map((bId) => (
-            <Box key={bId} sx={blockStyle}>
-              {view === "grid" ? (
-                <GridView bId={bId} data={data} onUpdate={handleUpdate} />
-              ) : (
-                <ListView bId={bId} data={data} onUpdate={handleUpdate} />
-              )}
+          <ToggleButtonGroup
+            value={view}
+            exclusive
+            onChange={(_, v) => v && setView(v)}
+          >
+            <ToggleButton value="grid">
+              <GridViewIcon /> Grid View
+            </ToggleButton>
+            <ToggleButton value="list">
+              <ListIcon /> List View
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+            <Box>
+              <Select
+                value={downloadType}
+                onChange={handleChange}
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "black",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "pink",
+                    borderWidth: 2,
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "pink",
+                  },
+                }}
+              >
+                <MenuItem value="png">PNG</MenuItem>
+                <MenuItem value="pdf">PDF</MenuItem>
+              </Select>
             </Box>
-          ))}
+            <DownloadBtn type={downloadType} />
+          </Box>
         </Box>
+        <Box
+          sx={{
+            flexGrow: 1,
+          }}
+        >
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateRows: "repeat(3, 1fr)",
+              gap: 2,
+              height: "100%",
+            }}
+          >
+            {blockLayout.map((bId) => (
+              <Box key={bId} sx={blockStyle}>
+                {view === "grid" ? (
+                  <GridView bId={bId} data={data} onUpdate={handleUpdate} />
+                ) : (
+                  <ListView bId={bId} data={data} onUpdate={handleUpdate} />
+                )}
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          flex: 2,
+          height: "90vh",
+          pl: 2,
+        }}
+      >
+        <About />
       </Box>
     </Box>
   );
