@@ -1,9 +1,20 @@
 import { useState } from "react";
-import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import GridViewIcon from "@mui/icons-material/GridView";
 import ListIcon from "@mui/icons-material/List";
 import { GridView } from "./ui/GridView";
 import { ListView } from "./ui/ListView";
+import DownloadBtn from "./ui/DownloadBtn";
 
 const createInitialData = () => {
   const blocks: any = { center: { cells: {} } };
@@ -26,6 +37,7 @@ const blockStyle = {
 export default function MandalartPage() {
   const [view, setView] = useState<"grid" | "list">("grid");
   const [data, setData] = useState(createInitialData());
+  const [downloadType, setDownloadType] = useState<string>("png");
   const blockLayout = ["1", "2", "3", "4", "center", "5", "6", "7", "8"];
 
   const handleUpdate = (blockId: string, cellId: string, value: string) => {
@@ -43,6 +55,10 @@ export default function MandalartPage() {
     });
   };
 
+  const handleChange = (event: SelectChangeEvent) => {
+    setDownloadType(event.target.value as string);
+  };
+
   return (
     <Box
       sx={{
@@ -52,7 +68,15 @@ export default function MandalartPage() {
         mb: 2,
       }}
     >
-      <Box sx={{ mb: 2 }}>
+      <Box
+        sx={{
+          mb: 2,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "70%",
+        }}
+      >
         <ToggleButtonGroup
           value={view}
           exclusive
@@ -65,13 +89,35 @@ export default function MandalartPage() {
             <ListIcon /> List View
           </ToggleButton>
         </ToggleButtonGroup>
+        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+          <Box>
+            <Select
+              value={downloadType}
+              onChange={handleChange}
+              size="small"
+              sx={{
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "black", // 기본 핑크
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "pink", // 포커스 시 핑크
+                  borderWidth: 2,
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "pink", // hover 핑크
+                },
+              }}
+            >
+              <MenuItem value="png">PNG</MenuItem>
+              <MenuItem value="pdf">PDF</MenuItem>
+            </Select>
+          </Box>
+          <DownloadBtn type={downloadType} />
+        </Box>
       </Box>
       <Box
         sx={{
           flexGrow: 1,
-          // display: "grid",
-          // gridTemplateColumns: "repeat(3, 1fr)",
-          // gridTemplateRows: "repeat(3, 1fr)",
           gap: 2,
         }}
       >
@@ -82,7 +128,6 @@ export default function MandalartPage() {
             gridTemplateRows: "repeat(3, 1fr)",
             gap: 2,
             width: "70%",
-            // height: "100%",
           }}
         >
           {blockLayout.map((bId) => (
