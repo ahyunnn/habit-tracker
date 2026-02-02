@@ -1,9 +1,8 @@
 import { Router, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "your-secret-key"; // 실제로는 환경변수로 관리!
+const JWT_SECRET = "your-secret-key"; 
 
 const router = Router();
 
@@ -60,7 +59,7 @@ router.post("/login", async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    const user = users.find((user) => (user.email = email));
+    const user = users.find((user) => (user.email === email));
     if (!user) {
       return res
         .status(401)
