@@ -23,7 +23,7 @@ export const ItemCard = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: isTitle ? (isCenterBlock ? "#e9ffee" : "#f0f0f0") : "white",
+        bgcolor: isTitle ? (isCenterBlock ? "#d3fbff" : "#f0f0f0") : "white",
         transition: "0.2s",
         "&:hover": { bgcolor: isTitle ? undefined : "#fafafa" },
       }}
@@ -37,7 +37,7 @@ export const ItemCard = ({
           height: "100%",
           "& .MuiInputBase-input": {
             textAlign: "center",
-            fontSize: "0.75rem",
+            fontSize: "17px",
             fontWeight: isTitle ? "bold" : "normal",
             color: "#000",
             p: 1,

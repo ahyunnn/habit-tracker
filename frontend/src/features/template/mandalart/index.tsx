@@ -89,7 +89,6 @@ export default function MandalartPage() {
           display: "flex",
           flexDirection: "column",
           mb: 2,
-          pr: 2,
         }}
       >
         <Box
@@ -98,6 +97,7 @@ export default function MandalartPage() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            width: "1000px",
           }}
         >
           <ToggleButtonGroup
@@ -149,7 +149,8 @@ export default function MandalartPage() {
               gridTemplateColumns: "repeat(3, 1fr)",
               gridTemplateRows: "repeat(3, 1fr)",
               gap: 2,
-              height: "100%",
+              width: "1000px",
+              // height: "100%",
             }}
           >
             {blockLayout.map((bId) => (
