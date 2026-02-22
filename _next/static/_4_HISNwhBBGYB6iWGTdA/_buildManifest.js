@@ -4,7 +4,7 @@ self.__BUILD_MANIFEST = {
     "beforeFiles": [
       {
         "source": "/habit-tracker//_next/:path+",
-        "destination": "/habit-tracker/_next/:path+"
+        "destination": "/habit-tracker/template/mandalart/_next/:path+"
       }
     ],
     "fallback": []
