@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   output: "export", // static export
-  basePath: "/habit-tracker",
+  basePath: "/habit-tracker/template/mandalart",
   assetPrefix: "/habit-tracker/",
 };
 
