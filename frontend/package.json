@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "homepage": "https://ahyunnn.github.io/habit-tracker",
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
