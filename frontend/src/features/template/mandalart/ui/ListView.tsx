@@ -16,7 +16,6 @@ export const ListView = ({ bId, data, onUpdate }: ListViewProps) => {
   const cellIds = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const cells = data[bId].cells;
 
-  // 🔹 각 Input ref 저장
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [focusedId, setFocusedId] = useState<string | null>(null);
 
@@ -63,7 +62,7 @@ export const ListView = ({ bId, data, onUpdate }: ListViewProps) => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                height: 25,
+                height: 31,
                 borderBottom: "1px solid #eee",
                 py: 0.5,
               }}

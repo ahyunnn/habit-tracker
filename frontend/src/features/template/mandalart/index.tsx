@@ -51,7 +51,6 @@ export default function MandalartPage() {
         },
       };
 
-      // center ↔ outer 연동 로직도 "같은 방식"으로 복사
       if (blockId === "center" && cellId !== "title") {
         next[cellId] = {
           ...next[cellId],
@@ -135,7 +134,7 @@ export default function MandalartPage() {
                 <MenuItem value="pdf">PDF</MenuItem>
               </Select>
             </Box>
-            <DownloadBtn type={downloadType} />
+            <DownloadBtn type={downloadType} data={data} viewMode={view} />
           </Box>
         </Box>
         <Box
@@ -150,7 +149,6 @@ export default function MandalartPage() {
               gridTemplateRows: "repeat(3, 1fr)",
               gap: 2,
               width: "1000px",
-              // height: "100%",
             }}
           >
             {blockLayout.map((bId) => (
