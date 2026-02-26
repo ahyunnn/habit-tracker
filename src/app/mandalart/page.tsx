@@ -7,8 +7,8 @@ import Footer from "@/features/mandalart/ui/Footer";
 
 const MandalartPage = () => {
   return (
-    <Box>
-      <Box sx={{ px: 10, py: 5, display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <Box sx={{ px: 10, py: 5, display: "flex", flex: 1 }}>
         <MandalartForm />
         <About />
       </Box>
@@ -18,5 +18,4 @@ const MandalartPage = () => {
     </Box>
   );
 };
-
 export default MandalartPage;

@@ -83,7 +83,7 @@ export default function MandalartPage() {
       <Box
         sx={{
           flex: 3,
-          height: "90vh",
+          // height: "90vh",
           display: "flex",
           flexDirection: "column",
           mb: 2,
