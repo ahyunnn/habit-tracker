@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Box,
   MenuItem,
@@ -12,6 +12,7 @@ import ListIcon from "@mui/icons-material/List";
 import { GridView } from "./ui/GridView";
 import { ListView } from "./ui/ListView";
 import DownloadBtn from "./ui/DownloadBtn";
+import { DownloadArea } from "./ui/DownloadArea";
 
 const createInitialData = () => {
   const blocks: any = { center: { cells: {} } };
@@ -32,6 +33,7 @@ const blockStyle = {
 };
 
 export default function MandalartPage() {
+  const captureRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<"grid" | "list">("grid");
   const [data, setData] = useState(createInitialData());
   const [downloadType, setDownloadType] = useState<string>("png");
@@ -133,7 +135,7 @@ export default function MandalartPage() {
                 <MenuItem value="pdf">PDF</MenuItem>
               </Select>
             </Box>
-            <DownloadBtn type={downloadType} data={data} viewMode={view} />
+            <DownloadBtn type={downloadType} captureRef={captureRef} />
           </Box>
         </Box>
         <Box
@@ -162,6 +164,7 @@ export default function MandalartPage() {
           </Box>
         </Box>
       </Box>
+      <DownloadArea ref={captureRef} data={data} view={view} />
     </Box>
   );
 }
